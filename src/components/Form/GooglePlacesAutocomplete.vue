@@ -59,7 +59,7 @@ export default {
 
   methods: {
     initAutocomplete() {
-      // eslint-disable-next-line
+      // eslint-disable-next-line no-undef
       this.autocomplete = new google.maps.places.Autocomplete(this.$refs.autocomplete.$el, {
         // types: ['geocode'] // restricting the search predictions to geographical location types
       })

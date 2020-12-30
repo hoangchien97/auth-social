@@ -2,7 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/contact">Contact</router-link>
     </div>
     <router-view />
   </div>
@@ -19,9 +20,10 @@ export default {
     };
   },
 
-  async created() {
+  created() {
     this.embedGoogleSdk();
     this.embedFacebookSdk();
+    this.embedGoogleMapSdk()
 
     this.mounted = true;
   },
@@ -58,6 +60,20 @@ export default {
         xfbml: true,
         version: "v7.0",
       });
+    },
+
+    embedGoogleMapSdk() {
+      const script = document.createElement('script')
+      script.async = true
+      script.defer = true;
+      script.crossorigin = 'anonymous'
+
+      const url = new URL('https://maps.googleapis.com/maps/api/js')
+      url.searchParams.set('key', process.env.VUE_APP_GOOGLE_MAP_KEY)
+      // url.searchParams.set('language', process.env.VUE_APP_I18N_LOCALE) // https://developers.google.com/maps/faq#languagesupport
+      url.searchParams.set('libraries', 'places')
+      script.src = url.href
+      document.head.appendChild(script)
     },
   },
 };
