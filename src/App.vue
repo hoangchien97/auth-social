@@ -8,6 +8,61 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: "App",
+
+  data() {
+    return {
+      isFacebookSdkEmbedded: false,
+      mounted: false,
+    };
+  },
+
+  async created() {
+    this.embedGoogleSdk();
+    this.embedFacebookSdk();
+
+    this.mounted = true;
+  },
+
+  methods: {
+    embedGoogleSdk() {
+      const script = document.createElement("script");
+      script.async = true;
+      script.defer = true;
+      script.src = "https://apis.google.com/js/platform.js?onload=init"
+      document.head.appendChild(script);
+    },
+
+    embedFacebookSdk() {
+      const script = document.createElement("script");
+      script.async = true;
+      script.crossorigin = "anonymous";
+      script.addEventListener("load", this.initFacebook);
+
+      const sdks = {
+        vi: "https://connect.facebook.net/vi_VN/sdk.js",
+        en: "https://connect.facebook.net/en_US/sdk.js",
+      };
+
+      script.src = sdks[process.env.VUE_APP_I18N_LOCALE] || sdks.en;
+      document.head.appendChild(script);
+    },
+
+    initFacebook() {
+      // eslint-disable-next-line no-undef
+      FB.init({
+        appId: process.env.VUE_APP_FACEBOOK_APP_ID,
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: "v7.0",
+      });
+    },
+  },
+};
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

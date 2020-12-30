@@ -1,0 +1,43 @@
+.scrollbar {
+	&::-webkit-scrollbar {
+		width: 5px;
+		height: 5px;
+	}
+
+	&::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px $color-black-300;
+		border-radius: 100px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border-radius: 100px;
+		-webkit-box-shadow: inset 0 0 6px $color-black-300;
+
+		&:hover {
+			-webkit-box-shadow: inset 0 0 6px $color-black;
+		}
+	}
+}
+
+// TEXT
+.ws-nowrap {
+	white-space: nowrap;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.page-title {
+  margin: 16px 0 24px;
+  font-size: 24px;
+  font-weight: bold;
+  color: $color-black-500;
+
+  @media (min-width: $xxs) {
+    margin: 24px 0 32px;
+    font-size: 32px;
+  }
+}
